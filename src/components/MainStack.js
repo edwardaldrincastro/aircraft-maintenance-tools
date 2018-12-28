@@ -34,10 +34,7 @@ const MainStack = createStackNavigator({
                 )
 
             }
-        },
-        // navigationOptions: {
-        //     drawer: 'What We Do?',
-        // }
+        }
     })
 
 const MainStackContainer = createAppContainer(MainStack)

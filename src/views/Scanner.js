@@ -19,36 +19,32 @@ class Scanner extends Component {
     })
   }
   qrHandler = async (value) => {
-    const payload = JSON.parse(value.data)
-    // await alert(info)
-    console.log(payload)
-    endpoint = payload.id
-    console.log('scanned:',endpoint)
-    response = await axios.get('https://aircraftmaintenance-350da.firebaseio.com/tools/' + endpoint + '.json')
-    // await alert(JSON.stringify(response))
-    await console.log(response)
-    
-    await this.props.navigation.navigate('Result', {response: response.data })
-    // this.setState({
-    //   scannedValue: JSON.parse(value.data)
-    // })
-    // alert(`scanned${JSON.stringify(value.data)}`)
-    // alert(`scanned: ${value.data.info.name}`)
+    try {
+      const payload = JSON.parse(value.data)
+      console.log(payload)
+      endpoint = payload.id
+      console.log('scanned:', endpoint)
+      endpoint ? 
+      response = await axios.get('https://aircraftmaintenance-350da.firebaseio.com/tools/' + endpoint + '.json')
+      : alert('Please scan an invalid QR Code.')
+      await console.log(response)
+      !response.error ? await this.props.navigation.navigate('Result', { response: response.data }) : console.log('Error', response.error)
+    } catch ({ response }) {
+      console.log('Error in get tool', response.error)
+      alert('Please scan an invalid QR Code')
+    }
   }
   render() {
     return (
       <View style={styles.container}>
-      {/* <Text>Scan QR CODE below</Text> */}
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <QRCodeScanner
             reactivate={true}
             reactivateTimeout={3000}
             onRead={value => this.qrHandler(value)}
-            showMarker={true} 
-            cameraStyle={{height: '100%', width: '100%'}}
-            // topContent={
-            //   <Text>Scan QR Code below</Text>}
-            />
+            showMarker={true}
+            cameraStyle={{ height: '100%', width: '100%' }}
+          />
         </ View>
       </View>
     )

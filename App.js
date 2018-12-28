@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, NetInfo } from 'react-native'
 
 import { MainStack } from "./src/components"
-import NoNetwork from "./src/views/NoNetwork"
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       network: false
     };

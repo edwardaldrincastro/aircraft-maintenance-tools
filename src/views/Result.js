@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
 
 class Result extends Component {
     constructor(props) {
@@ -15,10 +15,13 @@ class Result extends Component {
         return (
             <View style={styles.container}>
                 <Image source={{ uri: response.image }} style={{ height: '40%', width: '100%' }} />
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Text>Name: {response.name}</Text>
-                    <Text>ID: {response.id}</Text>
-                    <Button title='Submit' onPress={() => this.props.navigation.replace('Scanner')} />
+                <View style={styles.content}>
+                    <Text style={{ fontSize: 20 }}>Name: {response.name}</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.replace('Scanner')}>
+                        <View style={styles.button}>
+                            <Text style={{ color: '#fff', fontSize: 18 }}>Scan again</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -32,6 +35,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
+    content: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        padding: 20
+    },
+    button: {
+        backgroundColor: '#EF6B52',
+        height: 50,
+        width: 150,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 })
 
 export default Result

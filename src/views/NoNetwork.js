@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { RobotoText } from "../components";
 
 class NoNetwork extends Component {
     constructor(props) {
