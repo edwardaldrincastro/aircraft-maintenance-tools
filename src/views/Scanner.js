@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
+import QRCodeScanner from 'react-native-qrcode-scanner'
+
 
 const axios = require('axios')
 
@@ -7,45 +9,47 @@ class Scanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      input: '',
+      scannedValue: ''
     };
   }
-  buttonHandler = async (value) => {
-    try {
-      // console.log('value', value)
-      // const response = await axios({
-        // method: 'post',
-        // url: 'https://aircraftmaintenance-350da.firebaseio.com/tools.json',
-        // data: {
-        //   ...value
-        // },
-        // headers: {
-        //   "Content-type": "application/json; charset=UTF-8"
-      // }
-      // })
-      // console.log('response', response)
-      // alert('Submitted')
-      await this.props.navigation.navigate('Result')
-    } catch (error) {
-      alert('error in post')
-      console.error(error);
-    }
-
-  }
-
   inputHandler = (val) => {
     this.setState({
       input: val
     })
   }
-
+  qrHandler = async (value) => {
+    const payload = JSON.parse(value.data)
+    // await alert(info)
+    console.log(payload)
+    endpoint = payload.id
+    console.log('scanned:',endpoint)
+    response = await axios.get('https://aircraftmaintenance-350da.firebaseio.com/tools/' + endpoint + '.json')
+    // await alert(JSON.stringify(response))
+    await console.log(response)
+    
+    await this.props.navigation.navigate('Result', {response: response.data })
+    // this.setState({
+    //   scannedValue: JSON.parse(value.data)
+    // })
+    // alert(`scanned${JSON.stringify(value.data)}`)
+    // alert(`scanned: ${value.data.info.name}`)
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>Scanner Screen</Text>
-        <TextInput placeholder='text here' onChangeText={val => this.inputHandler(val)} value={this.state.input} />
-        <Button title='Submit' onPress={() => this.buttonHandler(this.state)} />
+      {/* <Text>Scan QR CODE below</Text> */}
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <QRCodeScanner
+            reactivate={true}
+            reactivateTimeout={3000}
+            onRead={value => this.qrHandler(value)}
+            showMarker={true} 
+            cameraStyle={{height: '100%', width: '100%'}}
+            // topContent={
+            //   <Text>Scan QR Code below</Text>}
+            />
+        </ View>
       </View>
     )
   }

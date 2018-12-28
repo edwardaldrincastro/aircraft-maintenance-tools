@@ -4,16 +4,21 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "android": "react-native run-android --port 8082",
+    "init": "react-native start --port 8082 --reset-cache"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^5.7.0",
     "react": "16.6.1",
     "react-native": "0.57.7",
+    "react-native-camera": "^1.6.4",
     "react-native-gesture-handler": "^1.0.12",
+    "react-native-qrcode-scanner": "^1.1.0",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.8"
+    "react-navigation": "^3.0.8",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

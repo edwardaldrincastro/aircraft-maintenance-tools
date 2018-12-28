@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, BackHandler, Button, ScrollView, Image } from 'react-native'
 import { createStackNavigator, createAppContainer } from "react-navigation"
-import { Home, Scanner, Result } from "../views"
+import { Home, Result } from "../views"
+import MenuTab from "./MenuTab";
 import { Back } from "../utilities/icons"
 
 const MainStack = createStackNavigator({
     Home: Home,
-    Scanner: Scanner,
+    Scanner: MenuTab,
     Result: Result
 },
     {
@@ -16,7 +17,7 @@ const MainStack = createStackNavigator({
             return {
                 title: 'Scanner',
                 headerStyle: {
-                    backgroundColor: '#4E9FBC',
+                    backgroundColor: '#1D44AF',
                 },
                 headerTitleStyle: {
                     color: '#fff',

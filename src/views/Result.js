@@ -1,53 +1,25 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
-
-const axios = require('axios')
+import { StyleSheet, Text, View, TextInput, Button, Image } from 'react-native'
 
 class Result extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            response: ''
         };
-    }
-    buttonHandler = async () => {
-        try {
-            // console.log('value', value)
-            const response = await axios({
-                method: 'get',
-                url: 'https://aircraftmaintenance-350da.firebaseio.com/tools.json',
-                params: {
-                    // ...value
-                },
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
-            console.log('response get', response)
-            this.inputHandler(response.data)
-            // this.props.navigation.navigate('')
-            alert('Submitted')
-        } catch (error) {
-            alert('error in post')
-            console.error(error);
-        }
-
-    }
-
-    inputHandler = (response) => {
-        this.setState({
-            response: response
-        })
     }
     static navigationOptions = {
         title: 'Result'
     }
     render() {
+        const response = this.props.navigation.getParam('response', 'no response')
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>Welcome to React Native!</Text>
-                <Text style={styles.instructions}>{JSON.stringify(this.state.response)}</Text>
-                <Button title='Submit' onPress={() => this.buttonHandler()} />
+                <Image source={{ uri: response.image }} style={{ height: '40%', width: '100%' }} />
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <Text>Name: {response.name}</Text>
+                    <Text>ID: {response.id}</Text>
+                    <Button title='Submit' onPress={() => this.props.navigation.replace('Scanner')} />
+                </View>
             </View>
         )
     }
@@ -59,16 +31,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
     },
 })
 
