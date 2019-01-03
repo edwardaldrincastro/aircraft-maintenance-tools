@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 
 class Result extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
     static navigationOptions = {
         title: 'Result'
     }

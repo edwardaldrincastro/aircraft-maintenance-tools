@@ -1,11 +1,9 @@
 import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation"
 import { Tools, Scanner } from "../views"
-import Config from "../views/Config";
 
 const MenuTab = createMaterialTopTabNavigator({
     Scanner: Scanner,
     Tools: Tools,
-    // Config: Config
 },
     {
         initialRouteName: 'Scanner',
@@ -23,7 +21,6 @@ const MenuTab = createMaterialTopTabNavigator({
             },
             style: {
                 backgroundColor: '#1D44AF',
-                // backgroundColor: '#EF6B52',
             }
         }
     })

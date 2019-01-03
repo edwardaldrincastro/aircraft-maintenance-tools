@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, BackHandler, Button, ScrollView, Image } from 'react-native'
+import { View, TouchableOpacity, } from 'react-native'
 import { createStackNavigator, createAppContainer } from "react-navigation"
 import { Home, Result } from "../views"
 import MenuTab from "./MenuTab";
@@ -8,7 +8,7 @@ import { Back } from "../utilities/icons"
 const MainStack = createStackNavigator({
     Home: Home,
     Scanner: MenuTab,
-    Result: Result
+    Result: Result,
 },
     {
         initialRouteName: 'Home',

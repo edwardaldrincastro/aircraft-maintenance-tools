@@ -10,15 +10,12 @@ class Tools extends Component {
             tools: []
         };
     }
-
     async componentDidMount() {
         const response = await axios.get('https://aircraftmaintenance-350da.firebaseio.com/tools.json')
         data = response.data
-        await console.log(data)
         result = Object.keys(data).map(key => {
             return data[key]
         })
-        await console.log(result)
         await this.setTools(result)
     }
     setTools = (result) => {
